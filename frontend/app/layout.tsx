@@ -325,13 +325,20 @@ const TRANSLATIONS = {
   }
 };
 
-// Create Context
-const LanguageContext = createContext({
+interface LanguageContextType {
+  language: string;
+  setLanguage: (lang: string) => void;
+  t: (key: string) => string;
+  theme: string;
+  setTheme: (theme: string) => void;
+}
+
+const LanguageContext = createContext<LanguageContextType>({
   language: "English",
-  setLanguage: (lang: string) => {},
-  t: (key: string) => "",
+  setLanguage: () => {},
+  t: (key: string) => key,
   theme: "light",
-  setTheme: (theme: string) => {}
+  setTheme: () => {},
 });
 
 export function useLanguage() {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from './layout';
+import { apiUrl } from '../lib/api';
 import { 
   Sprout, 
   Upload, 
@@ -67,7 +68,7 @@ export default function LandingPage() {
     e.preventDefault();
     setLoadingRec(true);
     try {
-      const res = await fetch('http://localhost:8000/api/v1/crop-recommendation/recommend', {
+      const res = await fetch(apiUrl('/api/v1/crop-recommendation/recommend'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -118,7 +119,7 @@ export default function LandingPage() {
     formData.append('model_name', 'YOLOv11');
 
     try {
-      const res = await fetch('http://localhost:8000/api/v1/disease-detection/detect', {
+      const res = await fetch(apiUrl('/api/v1/disease-detection/detect'), {
         method: 'POST',
         body: formData
       });

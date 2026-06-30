@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import { 
   MessageSquare, 
   Send, 
@@ -62,7 +63,7 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/api/v1/chatbot/query', {
+      const res = await fetch(apiUrl('/api/v1/chatbot/query'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -134,7 +135,7 @@ export default function Chatbot() {
       formData.append('file', selected);
 
       try {
-        const res = await fetch('http://localhost:8000/api/v1/chatbot/upload-pdf', {
+        const res = await fetch(apiUrl('/api/v1/chatbot/upload-pdf'), {
           method: 'POST',
           body: formData
         });

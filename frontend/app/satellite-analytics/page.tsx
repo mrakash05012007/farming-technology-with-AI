@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import { 
   LineChart, 
   Line, 
@@ -60,7 +61,7 @@ export default function SatelliteAnalytics() {
   const handleFetchSatellite = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/v1/satellite/analyze', {
+      const res = await fetch(apiUrl('/api/v1/satellite/analyze'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -259,7 +260,7 @@ export default function SatelliteAnalytics() {
                     <XAxis dataKey="date" stroke="#94a3b8" fontSize={9} />
                     <YAxis stroke="#94a3b8" fontSize={9} />
                     <Tooltip contentStyle={{ background: '#0f172a', border: 'none', borderRadius: '8px', color: '#f8fafc', fontSize: '11px' }} />
-                    <Legend wrapperStyle={{ fontSize: 10, pt: 10 }} />
+                    <Legend wrapperStyle={{ fontSize: 10, paddingTop: 10 }} />
                     <Line type="monotone" dataKey="ndvi" name="NDVI (Crop Health)" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
                     <Line type="monotone" dataKey="ndwi" name="NDWI (Water Content)" stroke="#06b6d4" strokeWidth={2} dot={{ r: 3 }} />
                     <Line type="monotone" dataKey="evi" name="EVI (Structural Index)" stroke="#fbbf24" strokeWidth={2} dot={{ r: 3 }} />

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import {
   AreaChart,
   Area,
@@ -99,7 +100,7 @@ export default function WeatherIntelligence() {
   const fetchWeather = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/v1/weather/forecast', {
+      const res = await fetch(apiUrl('/api/v1/weather/forecast'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ state, district })

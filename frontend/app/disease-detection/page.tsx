@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import { 
   Leaf, 
   Upload, 
@@ -101,7 +102,7 @@ export default function DiseaseDetection() {
     formData.append('model_name', modelName);
 
     try {
-      const res = await fetch('http://localhost:8000/api/v1/disease-detection/detect', {
+      const res = await fetch(apiUrl('/api/v1/disease-detection/detect'), {
         method: 'POST',
         body: formData
       });
@@ -327,7 +328,7 @@ export default function DiseaseDetection() {
                 <div className="flex items-center gap-2">
                   {result.id && (
                     <a 
-                      href={`http://localhost:8000/api/v1/disease-detection/report/${result.id}`}
+                      href={apiUrl(`/api/v1/disease-detection/report/${result.id}`)}
                       className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer"
                     >
                       <Download className="h-3.5 w-3.5" />

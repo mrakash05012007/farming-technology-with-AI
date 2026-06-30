@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import { INDIA_STATES_DISTRICTS } from '../data/india_data';
 import { 
   Sprout, 
@@ -54,7 +55,7 @@ export default function CropRecommendation() {
     setLoading(true);
     setStep(4); // Move to results step
     try {
-      const res = await fetch('http://localhost:8000/api/v1/crop-recommendation/recommend', {
+      const res = await fetch(apiUrl('/api/v1/crop-recommendation/recommend'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, BarChart, Bar
@@ -62,7 +63,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchSummary() {
       try {
-        const res = await fetch('http://localhost:8000/api/v1/dashboard/summary/1');
+        const res = await fetch(apiUrl('/api/v1/dashboard/summary/1'));
         setSummary(await res.json());
       } catch {
         setSummary(FALLBACK);

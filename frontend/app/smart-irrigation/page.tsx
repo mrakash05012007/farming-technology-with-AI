@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../layout';
+import { apiUrl } from '../../lib/api';
 import { 
   LineChart, 
   Line, 
@@ -83,7 +84,7 @@ export default function SmartIrrigation() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/v1/irrigation/calculate', {
+      const res = await fetch(apiUrl('/api/v1/irrigation/calculate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -131,7 +132,7 @@ export default function SmartIrrigation() {
     setLiveFlowRate(nextState ? 12.0 : 0.0);
 
     try {
-      await fetch('http://localhost:8000/api/v1/iot/control-pump', {
+      await fetch(apiUrl('/api/v1/iot/control-pump'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
